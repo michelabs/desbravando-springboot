@@ -1,5 +1,6 @@
 package com.michelabs.desbravandospringboot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,8 +27,9 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
-    private List<Order> pedidos = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 
     public User(Long id, String name, String email, String phone, String password) {
         this.id = id;
