@@ -21,6 +21,5 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.save(u1);
         userRepository.save(u2);
-
     }
 }
