@@ -1,9 +1,7 @@
 package com.michelabs.desbravandospringboot.services;
 
 import com.michelabs.desbravandospringboot.entities.Order;
-import com.michelabs.desbravandospringboot.entities.User;
 import com.michelabs.desbravandospringboot.repository.OrderRepository;
-import com.michelabs.desbravandospringboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,7 @@ public class OrderService {
        return orderRepository.findAll();
     }
 
-    public Order findUserById(Long id){
+    public Order findUserById(Long id) {
         Optional<Order> findOrderById = orderRepository.findById(id);
         return findOrderById.get();
     }

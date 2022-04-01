@@ -1,9 +1,7 @@
 package com.michelabs.desbravandospringboot.controllers;
 
 import com.michelabs.desbravandospringboot.entities.Order;
-import com.michelabs.desbravandospringboot.entities.User;
 import com.michelabs.desbravandospringboot.services.OrderService;
-import com.michelabs.desbravandospringboot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,15 +18,14 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    // retornando todos os usuários
     @GetMapping
-    public ResponseEntity<List<Order>> findAll(){
+    public ResponseEntity<List<Order>> findAll() {
         List<Order> listOrders = orderService.findAllOrders();
         return ResponseEntity.ok().body(listOrders);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Order> findById(@PathVariable Long id){
+    public ResponseEntity<Order> findById(@PathVariable Long id) {
         Order findOrderById = orderService.findUserById(id);
         return ResponseEntity.ok().body(findOrderById);
     }
