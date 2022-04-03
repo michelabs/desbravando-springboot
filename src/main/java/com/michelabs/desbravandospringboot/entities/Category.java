@@ -1,5 +1,6 @@
 package com.michelabs.desbravandospringboot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +18,8 @@ public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // criado do tipo SET para garantir que não haverá duplicidade
-    @Transient
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 
     @Id
