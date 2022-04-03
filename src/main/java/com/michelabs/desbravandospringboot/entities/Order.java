@@ -14,9 +14,6 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_order")
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -44,6 +41,7 @@ public class Order implements Serializable {
         setOrderStatus(orderStatus);
         this.client = client;
     }
+
     // alterado manualmente para receber um integer, e o retornar como um enum (OrderStatus)
     public OrderStatus getOrderStatus() {
         return OrderStatus.valueOf(orderStatus);
@@ -55,9 +53,34 @@ public class Order implements Serializable {
             this.orderStatus = orderStatus.getCode();
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Instant getMoment() {
+        return moment;
+    }
+
+    public void setMoment(Instant moment) {
+        this.moment = moment;
+    }
+
+    public User getClient() {
+        return client;
+    }
+
+    public void setClient(User client) {
+        this.client = client;
+    }
+
     public Set<OrderItem> getItems(){
         return items;
     }
+
 
     @Override
     public boolean equals(Object o) {

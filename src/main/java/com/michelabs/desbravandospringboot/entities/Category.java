@@ -12,32 +12,42 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_category")
 @NoArgsConstructor
-@Getter
-@ToString
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    // criado do tipo SET para garantir que não haverá duplicidade
-    @JsonIgnore
-    @ManyToMany(mappedBy = "categories")
-    private Set<Product> products = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
+    // criado do tipo SET para garantir que não haverá duplicidade
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products = new HashSet<>();
+
     public Category(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     @Override
