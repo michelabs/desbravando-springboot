@@ -1,14 +1,8 @@
 package com.michelabs.desbravandospringboot.config;
 
-import com.michelabs.desbravandospringboot.entities.Category;
-import com.michelabs.desbravandospringboot.entities.Order;
-import com.michelabs.desbravandospringboot.entities.Product;
-import com.michelabs.desbravandospringboot.entities.User;
+import com.michelabs.desbravandospringboot.entities.*;
 import com.michelabs.desbravandospringboot.entities.enums.OrderStatus;
-import com.michelabs.desbravandospringboot.repository.CategoryRepository;
-import com.michelabs.desbravandospringboot.repository.OrderRepository;
-import com.michelabs.desbravandospringboot.repository.ProductRepository;
-import com.michelabs.desbravandospringboot.repository.UserRepository;
+import com.michelabs.desbravandospringboot.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +25,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -82,5 +79,14 @@ public class TestConfig implements CommandLineRunner {
         orderRepository.save(order2);
         orderRepository.save(order3);
 
+        OrderItem ordemItem1 = new OrderItem(order1, product1, 2, product1.getPrice());
+        OrderItem ordemItem2 = new OrderItem(order1, product3, 1, product3.getPrice());
+        OrderItem ordemItem3 = new OrderItem(order2, product3, 2, product3.getPrice());
+        OrderItem ordemItem4 = new OrderItem(order3, product5, 2, product5.getPrice());
+
+        orderItemRepository.save(ordemItem1);
+        orderItemRepository.save(ordemItem2);
+        orderItemRepository.save(ordemItem3);
+        orderItemRepository.save(ordemItem4);
     }
 }

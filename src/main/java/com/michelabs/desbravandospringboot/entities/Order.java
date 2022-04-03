@@ -7,7 +7,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -25,12 +27,16 @@ public class Order implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
 
+    // informando do banco de dados que o valor a ser gravado, será um inteiro, porém, externo à classe, continuará como um ENUM (OrderStatus).
+    private Integer orderStatus;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
 
-    // informando do banco de dados que o valor a ser gravado, será um inteiro, porém, externo à classe, continuará como um ENUM (OrderStatus).
-    private Integer orderStatus;
+    @OneToMany(mappedBy = "id.order")
+    public Set<OrderItem> items = new HashSet<>();
+
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
@@ -47,6 +53,10 @@ public class Order implements Serializable {
     public void setOrderStatus(OrderStatus orderStatus) {
         if(orderStatus != null)
             this.orderStatus = orderStatus.getCode();
+    }
+
+    public Set<OrderItem> getItems(){
+        return items;
     }
 
     @Override
